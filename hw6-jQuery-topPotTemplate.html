@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>TopPot Donughnuts</title>
+		<!-- <link rel="stylesheet" href="name of file" />   -->
+		 <link rel="stylesheet" href="hw5-CSS-topPotTemplate.css">
+		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+	<body>
+		<!-- Nav -->
+		<nav id="nav">
+			<ul>
+				<!-- href="link" -->
+				<li><a href="#ourStory">Our Story</a></li>
+				<li><a href="#donuts">Donuts</a></li>
+				<li><a href="#coffee">Coffee</a></li>
+				<li><a href="#contact us">Contact us</a></li>
+			</ul>
+		</nav>
+
+		<!-- Home -->
+		<header class= "page-header">
+			<h1>Welcome to<strong><em> TopPot </em></strong> Doughnuts.</h1>
+		</header>
+
+		<p>Top Pot Doughnuts invites you to join us on our <strong><em>delicious</em></strong> journey of good taste. From our uniquely designed cafes to our hand-roasted coffee and hand-forged gourmet doughnuts, we are committed to doing things the old fashioned way beautifully, warmly, and with unfailing attention to details.</p>
+
+		<a href="#" class="big_button">Click for Shops</a>
+
+	  <table id='myTable' border = '2'>
+
+	    <tr class='container'>
+	      <th scope='col'>Location</th>
+	      <th scope='col'>Average Donuts/Day</th>
+	      <th scope='col'>Total Donuts/Hour</th>
+	    </tr>
+
+		    <tr>
+		    	<th class="location">Downtown</th>
+		    	<td class="data">971</td>
+		    	<td class="data">59</td>   
+				</tr>
+
+				<tr>
+					<th class="location">Capitol Hill</th>
+					<td class="data">504</td>
+		    	<td class="data">51</td>   
+				</tr>
+
+				<tr>
+					<th class="location">South Lake Union</th>
+					<td class="data">873</td>
+		    	<td class="data">124</td>   
+				</tr>
+
+				<tr>
+					<th class="location">Wedgewood</th>
+					<td class="data">300</td>
+		    	<td class="data">21</td>   
+				</tr>
+				
+				<tr>
+					<th class="location">Ballard</th>
+					<td class="data">1335</td>
+		    	<td class="data">97</td>   
+				</tr>
+
+			</table>
+			
+		
+		<script>
+   // constructor function
+			var DonutShop = function(location, minCstmr, maxCstmr, avgDonutsPerCstmr, hoursOfOp) {    
+				this.location = location;
+				this.minCstmr = minCstmr;
+				this.maxCstmr = maxCstmr;
+				this.avgDonutsPerCstmr = avgDonutsPerCstmr;
+				this.hoursOfOp = hoursOfOp;
+
+				this.getDonutsPerHour = function() {
+					var answer = (Math.floor(Math.random() * (this.maxCstmr-this.minCstmr) + this.minCstmr) * this.avgDonutsPerCstmr);
+					return answer;
+				}
+
+				this.getDonutsPerDay = function() {
+					var answer = this.getDonutsPerHour() * hoursOfOp;
+					return answer;
+				}
+			};
+			
+			// var downtown = new DonutShop("Downtown", 8, 43, 4.5, 8);
+			// var capHill = new DonutShop("Capitol Hill", 4, 37, 2, 8);
+			// var slu = new DonutShop("South Lake Union", 9, 23, 6.33, 10);
+			// var wedgewood = new DonutShop("Wedgewood", 2, 28, 1.25, 10);
+			// var ballard = new DonutShop("Ballard", 8, 58, 3.75, 8);
+			
+			// console.log(downtown.getDonutsPerDay());
+			// console.log(downtown.getDonutsPerHour());
+
+			// console.log(capHill.getDonutsPerDay());
+			// console.log(capHill.getDonutsPerHour());
+
+			// console.log(slu.getDonutsPerDay());
+			// console.log(slu.getDonutsPerHour());
+
+			// console.log(wedgewood.getDonutsPerDay());
+			// console.log(wedgewood.getDonutsPerHour());
+
+			// console.log(ballard.getDonutsPerDay());
+			// console.log(ballard.getDonutsPerHour());
+
+			var DonutMaster = function(){
+	      this.shops = [];
+	      this.addShop = function(location, minCstmr, maxCstmr, avgDonutsPerCstmr, hoursOfOp){
+	        	var newDonutShop = new DonutShop(location, minCstmr, maxCstmr, avgDonutsPerCstmr, hoursOfOp);
+	          this.shops.push(newDonutShop);          
+	      }
+	      this.generateReport = function(){
+	      	for(var i=0; i<this.shops.length; i++){
+	      		console.log("This Location: " + this.shops[i].location + " sells " + this.shops[i].getDonutsPerHour() + " donuts per hour and sells " + this.shops[i].getDonutsPerDay() + " donuts per hour.\n");
+
+	      	}
+	      }
+      }
+
+   		var master = new DonutMaster();
+   		master.addShop("Downtown", 8, 43, 4.5, 8);
+   		master.addShop("Capitol Hill", 4, 37, 2, 8);
+   		master.addShop("South Lake Union", 9, 23, 6.33, 10);
+   		master.addShop("Wedgewood", 2, 28, 1.25, 10);
+   		master.addShop("Ballard", 8, 58, 3.75, 8);
+
+   		master.generateReport();
+
+   		$(function(){
+				$("#myTable").hide(10);
+				$(".big_button").on("click", function() {
+					$("#myTable").slideToggle(200);
+					});
+
+				 $('.data').hide();
+    // $('.location').each(function() {
+    //   $(this).on('click', function() {
+    //     $(this).children('.data').slideToggle(10);
+    //     $(".data").show();
+
+
+
+				$(".location").click(function() {
+					$(".data").show(1000);
+
+				});
+			});
+  // });
+
+			// $(function(){
+			// 	$(.data).hide(10);
+
+			// });
+$(".location").on("click", function() {
+	$(".data").toggle();
+})
+				
+   	</script>
+  </body>
+</html>
+
+
+
+
